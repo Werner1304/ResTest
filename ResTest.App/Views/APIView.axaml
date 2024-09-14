@@ -1,0 +1,53 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:ui="using:FluentAvalonia.UI.Controls"
+			 xmlns:vm="using:ResTest.App.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:DataType="vm:APIViewModel"
+             x:Class="ResTest.App.Views.APIView">
+	<Grid Margin="10">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<StackPanel Orientation="Horizontal">
+			<StackPanel Orientation="Horizontal" Grid.Row="0">
+				<ComboBox ItemsSource="{Binding HttpMethods}" SelectedItem="{Binding Method}" Width="100"/>
+				<TextBox Width="400" HorizontalAlignment="Stretch" Text="{Binding URL, UpdateSourceTrigger=PropertyChanged}" Watermark="Enter a URL" />
+				<Button Content="Send" Command="{Binding SendRequestCommand}"/>
+			</StackPanel>
+		</StackPanel>
+		<DockPanel Grid.Row="1">
+			<Label Content="Request" DockPanel.Dock="Top"/>
+			<TabControl DockPanel.Dock="Bottom">
+				<TabItem Header="Body" FontSize="16">
+					<TextBox AcceptsReturn="True" AcceptsTab="True" Text="{Binding Body}"/>
+				</TabItem>
+				<TabItem Header="Headers" FontSize="16">
+					<StackPanel>
+						<Button Content="Add Empty" Command="{Binding AddEmptyHeaderCommand}"/>
+						<DataGrid ItemsSource="{Binding Headers}" AutoGenerateColumns="True" GridLinesVisibility="All" BorderThickness="1"/>
+					</StackPanel>
+				</TabItem>
+			</TabControl>
+		</DockPanel>
+		<DockPanel Grid.Row="2">
+			<StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+				<Label Content="Response"/>
+				<Label Content="{Binding Result.Status}"/>
+				<Label Content="{Binding Result.Duration}"/>
+			</StackPanel>
+			<TabControl DockPanel.Dock="Bottom">
+				<TabItem Header="Body" FontSize="16">
+					<TextBox AcceptsReturn="True" AcceptsTab="True" Text="{Binding Result.Body}" IsReadOnly="True"/>
+				</TabItem>
+				<TabItem Header="Headers" FontSize="16">
+					<DataGrid AutoGenerateColumns="True" ItemsSource="{Binding Result.Headers}" IsReadOnly="True" CanUserReorderColumns="False"  GridLinesVisibility="All" BorderThickness="1"/>
+				</TabItem>
+			</TabControl>
+		</DockPanel>
+	</Grid>
+</UserControl>
