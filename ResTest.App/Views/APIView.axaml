@@ -24,7 +24,7 @@
 			<Label Content="Request" DockPanel.Dock="Top"/>
 			<TabControl DockPanel.Dock="Bottom">
 				<TabItem Header="Body" FontSize="16">
-					<TextBox AcceptsReturn="True" AcceptsTab="True" Text="{Binding Body}"/>
+					<TextBox Text="{Binding Body}" FontFamily="Cascadia Code,Consolas,Menlo,Monospace" AcceptsReturn="True" AcceptsTab="True"/>
 				</TabItem>
 				<TabItem Header="Headers" FontSize="16">
 					<StackPanel>
@@ -42,7 +42,7 @@
 			</StackPanel>
 			<TabControl DockPanel.Dock="Bottom">
 				<TabItem Header="Body" FontSize="16">
-					<TextBox AcceptsReturn="True" AcceptsTab="True" Text="{Binding Result.Body}" IsReadOnly="True"/>
+					<TextBox Text="{Binding Result.Body}" FontFamily="Cascadia Code,Consolas,Menlo,Monospace" IsReadOnly="True"/>
 				</TabItem>
 				<TabItem Header="Headers" FontSize="16">
 					<DataGrid AutoGenerateColumns="True" ItemsSource="{Binding Result.Headers}" IsReadOnly="True" CanUserReorderColumns="False"  GridLinesVisibility="All" BorderThickness="1"/>
