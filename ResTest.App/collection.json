@@ -1,0 +1,14 @@
+[
+    {
+        "Name": "test",
+        "URL": "https://google.com",
+        "Method": "GET",
+        "Body": "Hallo Welt",
+        "Headers": [
+            {
+                "Key": "Content-Type",
+                "Value": "text/html"
+            }
+        ]
+    }
+]

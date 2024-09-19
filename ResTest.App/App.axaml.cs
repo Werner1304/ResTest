@@ -16,17 +16,22 @@ namespace ResTest.App
 
 		public override void OnFrameworkInitializationCompleted()
 		{
+			var window = new MainWindow();
+
 			var services = new ServiceCollection()
 				.AddSingleton<IFormattingService, BuiltinFormatter>()
+				.AddSingleton<IRequestRepository, JsonRequestRepository>()
 				.AddSingleton<IRequestService, HttpRequestService>()
+				.AddSingleton<IDialogService, DialogService>(s => new DialogService(window))
 				.AddSingleton<APIViewModel>()
 				.AddSingleton<MainViewModel>()
-				.AddSingleton<MainWindow>()
 				.BuildServiceProvider(new ServiceProviderOptions() { ValidateOnBuild = true });
+
+			window.DataContext = services.GetRequiredService<MainViewModel>();
 
 			if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
 			{
-				desktop.MainWindow = services.GetRequiredService<MainWindow>();
+				desktop.MainWindow = window;
 			}
 
 			base.OnFrameworkInitializationCompleted();
